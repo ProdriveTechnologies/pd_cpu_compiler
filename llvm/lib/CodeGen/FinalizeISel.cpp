@@ -48,6 +48,7 @@ INITIALIZE_PASS(FinalizeISel, DEBUG_TYPE,
 bool FinalizeISel::runOnMachineFunction(MachineFunction &MF) {
   bool Changed = false;
   const TargetLowering *TLI = MF.getSubtarget().getTargetLowering();
+  LLVM_DEBUG( dbgs() << "Start of FinalizeISel\n" );
 
   // Iterate through each instruction in the function, looking for pseudos.
   for (MachineFunction::iterator I = MF.begin(), E = MF.end(); I != E; ++I) {

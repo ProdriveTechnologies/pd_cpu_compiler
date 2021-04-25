@@ -211,6 +211,10 @@ E: craig.topper@gmail.com
 E: craig.topper@intel.com
 D: X86 Backend
 
+N: Simon de Vegt
+E: simon.de.vegt@prodrive-technologies.com
+D: PDCPU Backend
+
 N: Ulrich Weigand
 E: uweigand@de.ibm.com
 D: SystemZ Backend

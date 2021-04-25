@@ -1123,6 +1123,8 @@ StringRef ELFObjectFile<ELFT>::getFileFormatName() const {
       return "elf64-amdgpu";
     case ELF::EM_BPF:
       return "elf64-bpf";
+    case ELF::EM_PDCPU:
+      return "elf32-pdcpu";
     default:
       return "elf64-unknown";
     }
@@ -1194,10 +1196,10 @@ template <class ELFT> Triple::ArchType ELFObjectFile<ELFT>::getArch() const {
     if (MACH >= ELF::EF_AMDGPU_MACH_AMDGCN_FIRST &&
         MACH <= ELF::EF_AMDGPU_MACH_AMDGCN_LAST)
       return Triple::amdgcn;
-
+    }
     return Triple::UnknownArch;
-  }
-
+  case ELF::EM_PDCPU:
+      return Triple::pdcpu32;
   case ELF::EM_BPF:
     return IsLittleEndian ? Triple::bpfel : Triple::bpfeb;
 

@@ -573,6 +573,10 @@ static Instruction *combineLoadToOperationType(InstCombiner &IC, LoadInst &LI) {
   if (!LI.isUnordered())
     return nullptr;
 
+  // PDCPU cannot handle i32, this function generates i32 load store pairs which 
+  // cause trouble down the line.
+  return nullptr;
+
   if (LI.use_empty())
     return nullptr;
 

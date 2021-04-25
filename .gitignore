@@ -20,9 +20,11 @@
 .sw?
 #OS X specific files.
 .DS_store
+#NFS specifics
+.nfs*
 
 # Nested build directory
-/build*
+/build/*
 
 #==============================================================================#
 # Explicit files to ignore (only matches one).

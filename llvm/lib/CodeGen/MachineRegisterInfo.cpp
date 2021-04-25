@@ -244,7 +244,11 @@ void MachineRegisterInfo::verifyUseList(Register Reg) const {
     if (MO->getReg() != Reg) {
       errs() << printReg(Reg, getTargetRegisterInfo())
              << " use-list MachineOperand " << MO << ": "
-             << *MO << " is the wrong register\n";
+             << *MO << " is the wrong register, "
+             << MO->getReg() << " instead of "
+             << Reg << "\n";
+      MO->dump();
+      MI->dump();
       Valid = false;
     }
   }

@@ -2593,6 +2593,7 @@ static bool extractPredSuccWeights(BranchInst *PBI, BranchInst *BI,
 /// logical operations to pick the right destination.
 bool llvm::FoldBranchToCommonDest(BranchInst *BI, MemorySSAUpdater *MSSAU,
                                   unsigned BonusInstThreshold) {
+  return false;
   BasicBlock *BB = BI->getParent();
 
   const unsigned PredCount = pred_size(BB);

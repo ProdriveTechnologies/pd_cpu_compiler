@@ -1,0 +1,9 @@
+add_llvm_component_library(LLVMPDCPUDesc
+  PDCPUAsmBackend.cpp
+  PDCPUELFObjectWriter.cpp
+  PDCPUInstPrinter.cpp
+  PDCPUMCAsmInfo.cpp
+  PDCPUMCExpr.cpp
+  PDCPUMCCodeEmitter.cpp
+  PDCPUMCTargetDesc.cpp
+)

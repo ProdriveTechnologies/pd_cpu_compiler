@@ -145,6 +145,13 @@ StringRef llvm::object::getELFRelocationTypeName(uint32_t Machine,
       break;
     }
     break;
+  case ELF::EM_PDCPU:
+    switch (Type) {
+#include "llvm/BinaryFormat/ELFRelocs/PDCPU.def"
+    default:
+      break;
+    }
+    break;
   default:
     break;
   }

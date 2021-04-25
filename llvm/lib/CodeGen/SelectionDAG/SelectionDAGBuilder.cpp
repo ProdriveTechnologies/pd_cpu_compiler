@@ -2223,7 +2223,9 @@ void SelectionDAGBuilder::FindMergedConditions(const Value *Cond,
 /// false.
 bool
 SelectionDAGBuilder::ShouldEmitAsBranches(const std::vector<CaseBlock> &Cases) {
+  const TargetLowering &TLI = DAG.getTargetLoweringInfo();
   if (Cases.size() != 2) return true;
+  if (TLI.convertSetCCLogicToBitwiseLogic(EVT(MVT::f32)) == false) return true;
 
   // If this is two comparisons of the same values or'd or and'd together, they
   // will get folded into a single comparison, so don't emit two blocks.
@@ -9705,7 +9707,9 @@ void SelectionDAGISel::LowerArguments(const Function &F) {
     for (unsigned i = 0, e = Ins.size(); i != e; ++i) {
       assert(InVals[i].getNode() &&
              "LowerFormalArguments emitted a null value!");
-      assert(EVT(Ins[i].VT) == InVals[i].getValueType() &&
+      auto in = EVT(Ins[i].VT);
+      auto inval = InVals[i].getValueType();
+      assert(in == inval &&
              "LowerFormalArguments emitted a value with the wrong type!");
     }
   });

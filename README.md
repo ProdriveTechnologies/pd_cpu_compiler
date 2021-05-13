@@ -1,3 +1,64 @@
+# LLVM-based Compiler
+
+This repository contains the result of the masters thesis of Simon de Vegt for the master 'Embedded Systems' at the Eindhoven University of Technology.
+The resulting thesis can be found in the 'thesis' subfolder. The topic is 'Compiling Motion Control Algorithms for the PD-CPU Instruction Set Architecture'.
+
+As this project is a possible useful resource for LLVM based development it has been 
+decided to open source these efforts. 
+
+## Project TLDR;
+
+At Prodrive Technologies we work hard on automating different parts of the development process,
+in this case the process of going from a Simulink model to a functional FPGA implementation.
+The project tried to automate this by using Simulink -> C code generation,
+followed by Clang and a custom LLVM-backend which targetted a custom developed softcore.
+The main focus of the project was on the custom LLVM-backend.
+
+## Building and usage
+
+To build the compiler, a bash script has been added, run it once as `sh builddev.sh -g` to use CMake to generate the Makefiles. Then use `sh builddev.sh -b` to build.
+Other options are `-p` for the custom tests for this backend and `-t` to run the entire test suite. Options can be chained `sh builddev.sh -gbpt` but the order matters.
+
+### Example
+
+Use for example the following piece of example code and save it as `magicNumber.c`.
+```c
+// Only use 'float' as other types are not supported.
+float generateMagicNumber(float a, float b) {
+   return a * (42 + b);
+}
+```
+
+Compile this code using the following command `./build/bin/clang -S -emit-llvm -O3 example.c`, this produces `example.ll` which is the textual representation of LLVM-IR.
+Make sure to use the version of clang (and llc below) that you just build.
+
+To get our target specific assembly use the following command `./build/bin/llc -march=pdcpu32 example.ll`. This results in the following PD-CPU assembly:
+```
+        .text
+        .file   "example.c"
+        .globl  generateMagicNumber     # -- Begin function generateMagicNumber
+        .p2align        2
+        .type   generateMagicNumber,@function
+generateMagicNumber:                    # @generateMagicNumber
+generateMagicNumber$local:
+# %bb.0:                                # %entry
+        li      c447, 4.200000e+01
+        mov     f1, c447
+        fadd    f1, f11, f1
+        fmul    f10, f1, f10
+        eoi
+.Lfunc_end0:
+        .size   generateMagicNumber, .Lfunc_end0-generateMagicNumber
+                                        # -- End function
+```
+
+## Contributing and Maintenance
+As is, the project is a (stale) result of a graduation project. There is no roadmap planned.
+
+## Other Information
+The source code is covered by the LLVM license (modified Apache). The added and modified files have an indication of this as mandated by the LLVM license.
+If there are questions of any kind or you would like to get in touch, please email to opensource@prodrive-technologies.com
+
 # The LLVM Compiler Infrastructure
 
 This directory and its sub-directories contain source code for LLVM,

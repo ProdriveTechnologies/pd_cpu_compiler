@@ -1,3 +1,4 @@
+// Modifications Copyright 2021 Prodrive Technologies B.V.
 //===- SimplifyCFG.cpp - Code to perform CFG simplification ---------------===//
 //
 // Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.

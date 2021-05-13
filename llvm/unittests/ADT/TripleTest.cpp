@@ -1,3 +1,4 @@
+// Modifications Copyright 2021 Prodrive Technologies B.V.
 //===----------- Triple.cpp - Triple unit tests ---------------------------===//
 //
 // Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.

@@ -1,3 +1,4 @@
+// Modifications Copyright 2021 Prodrive Technologies B.V.
 //===- LegalizeDAG.cpp - Implement SelectionDAG::Legalize -----------------===//
 //
 // Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
